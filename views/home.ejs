@@ -1,0 +1,15 @@
+<%- include('./partials/header') %>
+
+<div class="container">
+  <h1 class="display-1 text-center" style="margin: 0 auto">Pokemon App</h1>
+  <div class="row">
+    <div class="col-lg"><%- include('./pokemonCard', {pokemon: pokemon}) %></div>
+  </div>
+
+  <form action="/" method="post">
+    <input class="form-control mb-3" type="text" name="pokemon" id="pokemon" placeholder="Search for a pokemon" />
+    <button class="form-control mb-3" type="submit">Search</button>
+  </form>
+
+  <%- include('./partials/footer') %>
+</div>
