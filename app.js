@@ -33,23 +33,32 @@ app.get('/', (req, res) => {
 
 });
 
-app.post('/', (req, res) => {
-    let pokemon = req.body.pokemon.toLowerCase();
-    if(!pokemon) {
-        pokemon = Math.floor(Math.random() * 898)
-    };
-    (async () => {
-        try {
+app.get('/:pokemon', (req, res) => {
+    let pokemon = req.params.pokemon;
 
-            const response = await got(PokeUrl + pokemon);
-            pokemon = JSON.parse(response.body)
-            console.log(pokemon.name)
-            
-            res.render('home', {pokemon: pokemon})
-        } catch (error) {
-            console.log(error.response.body)
-        }
+    (async () => {
+    try {
+
+        const response = await got(PokeUrl + pokemon);
+        pokemon = JSON.parse(response.body)
+        console.log(pokemon.name)
+        res.render('home', {pokemon: pokemon})
+    } catch (error) {
+        console.log(error.response.body)
+    }
     })();
+
+
+});
+
+app.post('/', (req, res) => {
+    let pokemon = req.body.pokemon;
+    if(!pokemon) {
+        pokemon = Math.floor(Math.random() * 898);
+    };
+
+    res.redirect('/' + pokemon)
+
 })
 
 app.listen(3000, () => {
