@@ -1,0 +1,9 @@
+<div class="type-info">
+  <% if(pokemon.types.length == 1) { %>
+  <p class="text-center first-type type-<%= pokemon.types[0].type.name %>"><%= pokemon.types[0].type.name.toUpperCase() %></p>
+  <p class="text-center type-normal">NORMAL</p>
+  <% } else {%>
+  <p class="text-center first-type type-<%= pokemon.types[0].type.name %>"><%= pokemon.types[0].type.name.toUpperCase() %></p>
+  <p class="text-center type-<%= pokemon.types[1].type.name %>"><%= pokemon.types[1].type.name.toUpperCase() %></p>
+  <% }; %>
+</div>

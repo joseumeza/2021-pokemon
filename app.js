@@ -3,6 +3,7 @@ const https = require('https');
 const ejs = require('ejs');
 const got = require('got');
 const bodyParser = require('body-parser')
+const _ = require('lodash');
 
 
 const app = express();
@@ -42,6 +43,7 @@ app.get('/:pokemon', (req, res) => {
         const response = await got(PokeUrl + pokemon);
         pokemon = JSON.parse(response.body)
         console.log(pokemon.name)
+        console.log(pokemon.types[0].type.name)
         res.render('home', {pokemon: pokemon})
     } catch (error) {
         console.log(error.response.body)
