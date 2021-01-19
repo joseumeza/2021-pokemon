@@ -4,6 +4,7 @@ const ejs = require('ejs');
 const got = require('got');
 const bodyParser = require('body-parser')
 const _ = require('lodash');
+const jquery = require('jquery');
 
 
 const app = express();
@@ -25,7 +26,6 @@ app.get('/', (req, res) => {
             const response = await got(PokeUrl + 25);
             pokemon = JSON.parse(response.body)
             console.log(pokemon.name)
-            
             res.render('home', {pokemon: pokemon})
         } catch (error) {
             console.log(error.response.body)
@@ -42,9 +42,7 @@ app.get('/:pokemon', (req, res) => {
 
         const response = await got(PokeUrl + pokemon);
         pokemon = JSON.parse(response.body)
-        console.log(pokemon.name)
-        console.log(pokemon.types[0].type.name)
-        res.render('home', {pokemon: pokemon, shiny:false})
+        res.render('home', {pokemon: pokemon})
     } catch (error) {
         console.log(error.response.body)
     }
@@ -59,9 +57,7 @@ app.get('/:pokemon/shiny', (req, res) => {
 
         const response = await got(PokeUrl + pokemon);
         pokemon = JSON.parse(response.body)
-        console.log(pokemon.name)
-        console.log(pokemon.types[0].type.name)
-        res.render('home', {pokemon: pokemon, shiny: true})
+        res.render('home', {pokemon: pokemon})
     } catch (error) {
         console.log(error.response.body)
     }
@@ -82,7 +78,3 @@ app.post('/', (req, res) => {
 app.listen(3000, () => {
     console.log('connected to port 3000');
 });
-
-
-
-
