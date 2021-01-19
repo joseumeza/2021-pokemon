@@ -44,12 +44,28 @@ app.get('/:pokemon', (req, res) => {
         pokemon = JSON.parse(response.body)
         console.log(pokemon.name)
         console.log(pokemon.types[0].type.name)
-        res.render('home', {pokemon: pokemon})
+        res.render('home', {pokemon: pokemon, shiny:false})
     } catch (error) {
         console.log(error.response.body)
     }
     })();
+});
 
+app.get('/:pokemon/shiny', (req, res) => {
+    let pokemon = req.params.pokemon;
+
+    (async () => {
+    try {
+
+        const response = await got(PokeUrl + pokemon);
+        pokemon = JSON.parse(response.body)
+        console.log(pokemon.name)
+        console.log(pokemon.types[0].type.name)
+        res.render('home', {pokemon: pokemon, shiny: true})
+    } catch (error) {
+        console.log(error.response.body)
+    }
+    })();
 
 });
 

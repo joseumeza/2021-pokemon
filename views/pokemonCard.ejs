@@ -1,19 +1,22 @@
 <div class="card pokecard bg-dark container-fluid" style="width: 18rem">
+  <a class="prev" href="/<%= pokemon.id-1 %> "><i class="fas fa-arrow-left"></i></a>
+  <a class="next" href="/<%= pokemon.id+1 %> "><i class="fas fa-arrow-right"></i></a>
+  <% if (!shiny) { %> 
   <img src= <%= pokemon.sprites.front_default %>  class="card-img-top" alt=<%="front-" + pokemon.name %> />
+  <%} else { %> 
+  <img src= <%= pokemon.sprites.front_shiny %>  class="card-img-top" alt=<%="front-" + pokemon.name %> />
+  <% }; %> 
   <div class="card-body">
       <%- include('./type', {pokemon: pokemon}) %> 
     <h1 class="card-title text-center"><%= pokemon.name.toUpperCase() %></h5>
     <div class="container">
-        <div class="row">
-            <div class="col card-info">ID:<%= pokemon.id %> </div>
+        <div class="row text-center card-info">
+            <div class="col card-info">ID: <%= pokemon.id %> </div>
             <div class="col card-info">Wt: <%= pokemon.weight %> </div>
         </div>
-        <div class="row">
-          <div class="col-6">
-            <a href="..." class="btn btn-primary">Evolution</a>
-          </div>
-          <div class="col-6">
-          <a href="..." class="btn btn-primary">Shiny</a>
+        <div class="row text-center">
+          <div class="col">
+          <a href="/<%= pokemon.id%>/shiny" class="btn btn-primary">Shiny</a>
           </div>
         </div>
     </div>
