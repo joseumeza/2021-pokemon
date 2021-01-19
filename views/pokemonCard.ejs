@@ -17,4 +17,55 @@
         </div>
     </div>
   </div>
+  <script>
+    const URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+    let shiny = document.getElementById('shiny');
+    let pokeImg = document.getElementById('image');
+
+    let ogPoke = pokeImg.src ;
+    let ogPokeBack = URL + 'back/' + pokeImg.name + '.png';
+    let shinyPoke = URL + 'shiny/' + pokeImg.name + '.png';
+    let shinyBackPoke = URL + 'back/shiny/' + pokeImg.name + '.png';
+
+    let isShiny = false
+    let isFront = true
+
+    pokeImg.addEventListener('click', () => {
+      if(isShiny && isFront) {
+        pokeImg.src = shinyBackPoke;
+        isFront = false
+      } else if (!isShiny && isFront){
+        pokeImg.src = ogPokeBack;
+        isFront = false
+      } else if(isShiny && !isFront) {
+        pokeImg.src = shinyPoke;    
+        isFront = true
+      } else if (!isShiny && !isFront) {
+        pokeImg.src = ogPoke;
+        isFront = true
+      }
+    })
+
+    shiny.addEventListener('click', () => {
+      if(isShiny && isFront) {
+        pokeImg.src = ogPoke;
+        shiny.innerHTML = "Shiny"
+        isShiny = false 
+      } else if (!isShiny && isFront){
+        pokeImg.src = shinyPoke;
+        shiny.innerHTML = 'Not Shiny'
+        isShiny = true
+      } else if(isShiny && !isFront) {
+        pokeImg.src = ogPokeBack
+        shiny.innerHTML = 'Shiny'
+        isShiny = false
+      } else if (!isShiny && !isFront) {
+        pokeImg.src = shinyBackPoke;
+        shiny.innerHTML = 'Shiny';
+        isShiny = true;
+
+      }
+    });
+
+  </script>
 </div>

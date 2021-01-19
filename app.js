@@ -1,5 +1,4 @@
 const express = require('express');
-const https = require('https');
 const ejs = require('ejs');
 const got = require('got');
 const bodyParser = require('body-parser')
@@ -34,6 +33,10 @@ app.get('/', (req, res) => {
 
 });
 
+app.get('/notfound', (req, res) => {
+    res.render('notFound')
+})
+
 app.get('/:pokemon', (req, res) => {
     let pokemon = req.params.pokemon;
 
@@ -45,28 +48,15 @@ app.get('/:pokemon', (req, res) => {
         res.render('home', {pokemon: pokemon})
     } catch (error) {
         console.log(error.response.body)
+        res.redirect('notFound');
+        // res.redirect('back');
     }
     })();
-});
-
-app.get('/:pokemon/shiny', (req, res) => {
-    let pokemon = req.params.pokemon;
-
-    (async () => {
-    try {
-
-        const response = await got(PokeUrl + pokemon);
-        pokemon = JSON.parse(response.body)
-        res.render('home', {pokemon: pokemon})
-    } catch (error) {
-        console.log(error.response.body)
-    }
-    })();
-
 });
 
 app.post('/', (req, res) => {
     let pokemon = req.body.pokemon;
+    
     if(!pokemon) {
         pokemon = Math.floor(Math.random() * 898);
     };
